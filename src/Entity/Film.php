@@ -35,6 +35,7 @@ class Film
 
 
     /**
+     * @var null|ArrayCollection
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="films")
      * @ORM\JoinTable(name="films_tags")
      */
@@ -47,6 +48,84 @@ class Film
     {
         $this->tags = new ArrayCollection();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     * @return Film
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return Film
+     */
+    public function setTitle(string $title): Film
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getYear(): ?string
+    {
+        return $this->year;
+    }
+
+    /**
+     * @param string $year
+     * @return Film
+     */
+    public function setYear(string $year): Film
+    {
+        $this->year = $year;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    public function getListTags()
+    {
+        return implode(',',$this->getTags());
+    }
+
+    /**
+     * @param mixed $tags
+     * @return Film
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+        return $this;
+    }
+
 
 
 }

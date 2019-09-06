@@ -25,3 +25,20 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+
+    App\Controller\FilmController:
+        autowire: true
+        autoconfigure: true
+
+    App\Controller\TagController:
+        autowire: true
+        autoconfigure: true
+
+    App\Repositiry\FilmRepository:
+        autowire: true
+        autoconfigure: true
+
+    App\Repositiry\TagRepository:
+        autowire: true
+        autoconfigure: true
