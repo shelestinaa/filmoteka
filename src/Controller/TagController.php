@@ -6,6 +6,7 @@ use App\Entity\Tag;
 use App\Form\TagType;
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -44,7 +45,7 @@ class TagController extends AbstractController
         }
 
         return $this->render('tag/new.html.twig', [
-            'tag' => $tag,
+            'tag'  => $tag,
             'form' => $form->createView(),
         ]);
     }
@@ -74,7 +75,7 @@ class TagController extends AbstractController
         }
 
         return $this->render('tag/edit.html.twig', [
-            'tag' => $tag,
+            'tag'  => $tag,
             'form' => $form->createView(),
         ]);
     }
@@ -84,12 +85,35 @@ class TagController extends AbstractController
      */
     public function delete(Request $request, Tag $tag): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $tag->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($tag);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('tag_index');
+    }
+
+
+    /**
+     * @Route("/check/{title}", requirements={"title"=".+"}, name="check_tag_exists", methods={"GET"})
+     * @param string $title
+     * @return JsonResponse
+     */
+    public function checkTagExists(string $title): JsonResponse
+    {
+        $doctrine = $this->getDoctrine();
+        $tagRepository = $doctrine->getRepository(Tag::class);
+        $tag = $tagRepository->findOneBy(['title' => $title]);
+
+        if (!$tag) {
+            $tag = new Tag;
+            $tag->setTitle($title);
+
+            $doctrine->getManager()->persist($tag);
+            $doctrine->getManager()->flush();
+        }
+
+        return new JsonResponse($tag);
     }
 }

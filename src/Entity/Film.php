@@ -29,7 +29,7 @@ class Film
 
     /**
      * @var string
-     * @ORM\Column(name="year", type="string", nullable=false)
+     * @ORM\Column(name="year", type="integer", nullable=false, length=4)
      */
     protected $year;
 

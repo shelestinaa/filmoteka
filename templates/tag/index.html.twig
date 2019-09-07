@@ -9,16 +9,16 @@
         <thead>
             <tr>
                 <th>Title</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for tag in tags %}
             <tr>
-                <td>{{ tag.title }}</td>
-                <td>
-                    <a href="{{ path('tag_show', {'id': tag.id}) }}">show</a>
-                    <a href="{{ path('tag_edit', {'id': tag.id}) }}">edit</a>
+                <td width="80% ">{{ tag.title }}</td>
+                <td width="20%">
+                    <a href="{{ path('tag_show', {'id': tag.id}) }}" class="btn btn-primary">Show</a>
+                    <a href="{{ path('tag_edit', {'id': tag.id}) }}" class="btn btn-info">Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -29,5 +29,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('tag_new') }}">Create new</a>
+    <a href="{{ path('tag_new') }}" class="btn btn-success">Create new</a>
 {% endblock %}

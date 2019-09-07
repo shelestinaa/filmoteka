@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
+use JsonSerializable;
 
 /**
  * Class Tag
@@ -11,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="tags")
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  */
-class Tag
+class Tag implements JsonSerializable
 {
 
     /**
@@ -24,7 +26,7 @@ class Tag
 
     /**
      * @var null|string
-     * @ORM\Column(name="title", type="string")
+     * @ORM\Column(name="title", type="string", unique=true, length=16)
      */
     protected $title;
 
@@ -95,6 +97,14 @@ class Tag
     {
         $this->films = $films;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id'    => $this->getId(),
+            'title' => $this->getTitle()
+        ];
     }
 
 

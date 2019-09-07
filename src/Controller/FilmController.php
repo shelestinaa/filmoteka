@@ -6,7 +6,9 @@ use App\Entity\Film;
 use App\Entity\Tag;
 use App\Form\FilmType;
 use App\Repository\FilmRepository;
+use App\Repository\FilmRepositoryInterface;
 use App\Repository\TagRepository;
+use App\Repository\TagRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,19 +19,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class FilmController extends AbstractController
 {
-    /**
-     * @Route("/", name="film_index", methods={"GET"})
-     */
-    public function index(FilmRepository $filmRepository, TagRepository $tagRepository): Response
-    {
-
-
-        return $this->render('film/index.html.twig', [
-            'films' => $filmRepository->findAll(),
-            'tags' => $tagRepository->findAll(),
-        ]);
-    }
-
     /**
      * @Route("/new", name="film_new", methods={"GET","POST"})
      */
@@ -44,7 +33,7 @@ class FilmController extends AbstractController
             $entityManager->persist($film);
             $entityManager->flush();
 
-            return $this->redirectToRoute('film_index');
+            return $this->redirectToRoute('index');
         }
 
         return $this->render('film/new.html.twig', [
@@ -74,7 +63,7 @@ class FilmController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('film_index');
+            return $this->redirectToRoute('index');
         }
 
         return $this->render('film/edit.html.twig', [
@@ -94,6 +83,6 @@ class FilmController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('film_index');
+        return $this->redirectToRoute('index');
     }
 }

@@ -8,7 +8,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityRepository;
 
-class FilmRepository extends ServiceEntityRepository
+class FilmRepository extends ServiceEntityRepository implements  FilmRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {

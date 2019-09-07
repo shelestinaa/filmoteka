@@ -3,37 +3,36 @@
 {% block title %}Film index{% endblock %}
 
 {% block body %}
-    <h1>Film index</h1>
     {% for curr_tag in tags %}
         <h2>{{ curr_tag.title }}</h2>
-    <table class="table">
-        <thead>
+        <table class="table">
+            <thead>
             <tr>
-                <th>Title</th>
-                <th>Year</th>
-                <th>Tag</th>
-                <th>actions</th>
+                <th width="30%">Title</th>
+                <th width="10%">Year</th>
+                <th width="40%">Tag</th>
+                <th width="20%">Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for film in curr_tag.films %}
-            <tr>
-                <td>{{ film.title }}</td>
-                <td>{{ film.year }}</td>
-                <td>{% for tag in film.tags %}{{ tag.title }}<br>    {% endfor %}</td>
-                <td>
-                    <a href="{{ path('film_show', {'id': film.id}) }}">show</a>
-                    <a href="{{ path('film_edit', {'id': film.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for film in curr_tag.films|sortFilms %}
+                <tr>
+                    <td>{{ film.title }}</td>
+                    <td>{{ film.year }}</td>
+                    <td>{% for tag in film.tags %}<span class="badge badge-secondary" style="margin-right: 3px">{{ tag.title }}</span>{% endfor %}</td>
+                    <td>
+                        <a href="{{ path('film_show', {'id': film.id}) }}" class="btn btn-primary">Show</a>
+                        <a href="{{ path('film_edit', {'id': film.id}) }}" class="btn btn-info">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     {% endfor %}
 
-    <a href="{{ path('film_new') }}">Create new</a>
+    <a href="{{ path('film_new') }}" class="btn btn-success">Create new</a>
 {% endblock %}
