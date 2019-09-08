@@ -15,10 +15,9 @@ class TagType extends AbstractType
         $builder
             ->add('title',
                 TextType::class,
-                ['attr'=>[
-                    'class'=>'form-control'
-                ]])
-        ;
+                ['attr' => [
+                    'class' => 'form-control'
+                ]]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

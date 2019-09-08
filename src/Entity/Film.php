@@ -28,7 +28,7 @@ class Film
     protected $title;
 
     /**
-     * @var string
+     * @var int
      * @ORM\Column(name="year", type="integer", nullable=false, length=4)
      */
     protected $year;
@@ -86,18 +86,18 @@ class Film
     }
 
     /**
-     * @return null|string
+     * @return null|int
      */
-    public function getYear(): ?string
+    public function getYear(): ?int
     {
         return $this->year;
     }
 
     /**
-     * @param string $year
+     * @param int $year
      * @return Film
      */
-    public function setYear(string $year): Film
+    public function setYear(int $year): Film
     {
         $this->year = $year;
         return $this;
@@ -113,7 +113,7 @@ class Film
 
     public function getListTags()
     {
-        return implode(',',$this->getTags());
+        return implode(',', $this->getTags());
     }
 
     /**
@@ -125,7 +125,6 @@ class Film
         $this->tags = $tags;
         return $this;
     }
-
 
 
 }

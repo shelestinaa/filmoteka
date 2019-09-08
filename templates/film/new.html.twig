@@ -3,13 +3,13 @@
 {% block title %}New Film{% endblock %}
 
 {% block body %}
-    {{ parent()}}
+    {{ parent() }}
     <h1>Create new Film</h1>
 
     {{ include('film/_form.html.twig') }}
 
 {% endblock %}
 {% block javascripts %}
-{{ parent() }}
+    {{ parent() }}
     {{ encore_entry_script_tags('tagSelect') }}
 {% endblock %}
