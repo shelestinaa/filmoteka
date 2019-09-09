@@ -41,16 +41,6 @@ class FilmType extends AbstractType
                         'class'    => 'form-control selecting',
                         'multiple' => 'multiple',
                     ]
-//                ChoiceType::class, [
-//                    'choices'      => [
-//                        'tags' => function (TagRepository $tagRepository) {
-//                            return $tagRepository->findAll();
-//                        }],
-//                    'expanded' => true,
-//                    'multiple' => true,
-//                    'choice_label' => function (Tag $tag, $key, $value) {
-//                        return $tag->getTitle();
-//                    },
                 ]
             );
     }

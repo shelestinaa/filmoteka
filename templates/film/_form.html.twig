@@ -5,3 +5,17 @@
     <button class="btn btn-warning">{{ button_label|default('Save') }}</button>
 </div>
 {{ form_end(form) }}
+{% block modal %}
+<div class="modal" tabindex="-1" id="myInput" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h5>Добавление нового тега</h5>
+                <div class="spinner-border" role="status" align="center">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
